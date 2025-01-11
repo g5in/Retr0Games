@@ -1,0 +1,186 @@
+@import url('https://fonts.googleapis.com/css2?family=Jersey+15&family=Raleway&display=swap');
+
+*::selection {
+    background-color: white;
+}
+
+:is(h1, h2, h3, h4, h5, p, a) {
+    outline: none;
+    color: forestgreen;
+    font-family: "Jersey 15", serif;
+    font-weight: 400;
+}
+
+body {
+    background-color: black;
+}
+
+.container {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+header {
+    height: 150px;
+}
+
+.header__inner {
+    height: 150px;
+    border-bottom: 5px solid forestgreen;
+    border-radius: 0.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-logo {
+    color: forestgreen;
+    font-size: 40px;
+    transition: 200ms ease;
+}
+
+.header-logo:hover {
+    text-shadow: 13px 13px lawngreen;
+    color: forestgreen;
+    font-size: 45px;
+    transition: 200ms ease;
+}
+
+.header-logo:is(:focus, :active) {
+    text-shadow: none;
+    color: rgb(46, 160, 46);
+    font-size: 30px;
+    transition: 100ms ease;
+}
+
+.header-logo span {
+    position: relative;
+    bottom: 0;
+    display: inline-block;
+    transform: rotateZ(270deg);
+    width: 20px;
+}
+
+.nav {
+    width: 400px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 25px;
+}
+
+.nav li a {
+    transition: 200ms ease;
+}
+
+.nav li a:hover {
+    text-shadow: 13px 13px lawngreen;
+    color: forestgreen;
+    font-size: 35px;
+    transition: 200ms ease;
+}
+
+.nav li a:is(:focus, :active) {
+    text-shadow: none;
+    color: rgb(46, 160, 46);
+    font-size: 20px;
+    transition: 100ms ease;
+}
+
+
+.hero {
+    height: calc(100vh - 150px);
+}
+
+.hero {
+    height: calc(100vh - 150px);
+    padding: 50px 0;
+}
+
+.hero__inner h1 {
+    font-size: 35px;
+    padding-bottom: 5px;
+}
+.hero__inner h2 {
+    font-size: 28px;
+    padding-bottom: 15px;
+}
+
+.hero__cards {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.hero__inner p {
+    width: 200px;
+    font-size: 23px;
+}
+
+
+.sneak {
+    height: 600px;
+    background-color: aquamarine;
+}
+
+.sneak__inner {
+    height: 600px;
+    padding: 25px 0;
+    background-color: azure;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+}
+
+.start {
+    width: 100px;
+    height: 25px;
+    background-color: bisque;
+}
+
+.cell,
+.player {
+    height: 25px;
+    width: 25px;
+    background-color: cornflowerblue;
+    border-radius: 0.1rem;
+}
+
+.player {
+    background-color: tomato;
+    border-radius: 0.5rem;
+    grid-column: 1;
+    grid-row: 1;
+    z-index: 11;
+}
+
+.apple {
+    background-color: crimson;
+    border-radius: 0.5rem;
+    grid-column: 2;
+    grid-row: 2;
+}
+
+.sneak-place,
+.cells {
+    height: 445px;
+    width: 445px;
+    display: grid;
+    grid-template-columns: repeat(16, 25px);
+    grid-template-rows: repeat(16, 25px);
+    gap: 3px;
+}
+
+.cells {
+    position: absolute;
+}
+
+.sneak-place {
+    z-index: 10;
+}
+
+
+footer {
+    height: 250px;
+    background-color: cornflowerblue;
+}
