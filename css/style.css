@@ -132,7 +132,7 @@ header {
     flex-direction: column;
 }
 
-.start {
+.sneak-btn {
     width: 100px;
     height: 25px;
     background-color: bisque;
@@ -149,8 +149,8 @@ header {
 .player {
     background-color: tomato;
     border-radius: 0.5rem;
-    grid-column: 1;
-    grid-row: 1;
+    grid-column: 2;
+    grid-row: 2;
     z-index: 11;
     transition: 200ms ease;
 }
