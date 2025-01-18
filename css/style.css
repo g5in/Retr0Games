@@ -152,6 +152,7 @@ header {
     grid-column: 1;
     grid-row: 1;
     z-index: 11;
+    transition: 200ms ease;
 }
 
 .apple {
