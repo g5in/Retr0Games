@@ -63,15 +63,15 @@ sneakBtn.click(() => {
     }
     // sneakBtn.click(() => gameStop = true )
     if (sneakX <= 0 || sneakX >= 17 || sneakY <= 0 || sneakY >= 17 || gameStop == true) {
-      score = 0
       sneakY = 2
       sneakX = 2
       sneakBtn.text("Start")
+      score = 0
       apple.hide()
       gameStop = false
       data = "d"
       alert("GameOver")
-      setTimeout(() => clearInterval(timerId), 0)
+      setTimeout(() => clearInterval(timerId), 10)
     }
     apple.css("grid-row", `${appleY}`)
     apple.css("grid-column", `${appleX}`)
