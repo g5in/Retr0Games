@@ -4,7 +4,7 @@
     background-color: white;
 }
 
-:is(h1, h2, h3, h4, h5, p, a, button) {
+:is(h1, h2, h3, h4, h5, p, a, button, div) {
     outline: none;
     color: forestgreen;
     font-family: "Jersey 15", serif;
@@ -134,11 +134,20 @@ header {
 }
 
 .sneak__inner {
+    position: relative;
     height: 600px;
     padding: 25px 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border: 2px solid forestgreen;
+}
+.sneak__inner::before {
+    content: "_Sneak__";
+    position: absolute;
+    font-size: 42px;
+    z-index: 11;
+    top: -42px;
 }
 
 .sneak__left,
@@ -177,12 +186,12 @@ header {
     justify-content: center;
     align-items: center;
     width: 100px;
-    height: 30px;
+    height: 35px;
     font-size: 20px;
     background-color: black;
     border: 3px solid forestgreen;
     transition: 300ms ease-in-out;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
 }
 
 .sneak-btn:is(:hover) {
@@ -191,7 +200,17 @@ header {
     font-size: 25px;
     transition: 300ms ease-in-out;
     margin-bottom: 10px;
-    animation: sneak-btn 2s infinite alternate;
+    animation: sneak-btn 2s infinite alternate ease-in-out;
+}
+
+@keyframes sneak-btn {
+    50% {
+        transform: rotate(20deg);
+    }
+
+    100% {
+        transform: rotate(-20deg);
+    }
 }
 
 .sneak-btn:active {
@@ -201,15 +220,6 @@ header {
     animation: none;
     transform: rotate(0);
     transition: 300ms ease-in-out;
-}
-
-@keyframes sneak-btn {
-    50% {
-        transform: rotate(20deg);
-    }
-    100% {
-        transform: rotate(-20deg);
-    }
 }
 
 .cell,
@@ -236,8 +246,112 @@ header {
     grid-row: 2;
 }
 
+.sneak__right {
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.score {
+    font-size: 36px;
+    animation: sneak-score 2.5s infinite alternate ease-in-out;
+    margin-bottom: 20px;
+}
+
+@keyframes sneak-score {
+    50% {
+        transform: rotate(15deg);
+    }
+
+    100% {
+        transform: rotate(-15deg);
+    }
+}
+
+.sneak-info {
+    position: relative;
+    height: 115px;
+    width: 185px;
+    align-self: start;
+    display: grid;
+    grid-template-columns: repeat(3, 50px);
+    grid-template-rows: repeat(2, 50px);
+    gap: 20px;
+}
+
+.sneak-info::after {
+    content: "Click keys for moving!";
+    position: absolute;
+    left: 250px;
+    font-size: 28px;
+    width: 100px;
+}
+
+.sneak-key {
+    position: relative;
+    top: 0;
+    left: 0;
+    height: 50px;
+    width: 50px;
+    background-color: black;
+    border: 1px solid forestgreen;
+    box-shadow: forestgreen 10px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -ms-user-select: none;
+    user-select: none;
+    transition: 100ms all ease-in-out;
+}
+
+.sneak-key:hover {
+    font-size: 20px;
+    height: 53px;
+    width: 53px;
+    border: 1px solid forestgreen;
+    box-shadow: forestgreen 10px 10px;
+    transition: 100ms all ease-in-out;
+}
+
+.sneak-key:active {
+    height: 50px;
+    width: 50px;
+    top: 5px;
+    left: 5px;
+    border: 1px solid rgb(16, 109, 16);
+    box-shadow: rgb(16, 109, 16) 5px 5px;
+    transition: 100ms all ease-in-out;
+}
+
+.sneak-w {
+    grid-column: 2;
+}
+
+.sneak-a {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.sneak-s {
+    grid-column: 2;
+    grid-row: 2;
+}
+
+.sneak-d {
+    grid-column: 3;
+    grid-row: 2;
+}
+
+
 
 footer {
     height: 250px;
-    background-color: cornflowerblue;
+}
+
+.footer__inner {
+    height: 250px;
+    border-top: 5px solid forestgreen;
+    border-radius: 0.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }

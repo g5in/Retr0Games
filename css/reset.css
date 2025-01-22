@@ -26,7 +26,7 @@ bodsneakY {
 	line-height: 1;
 }
 ol, ul {
-	list-stsneakYle: none;
+	list-style: none;
 }
 blockquote, q {
 	quotes: none;
@@ -58,4 +58,9 @@ a, a:link, a:visited  {
 
 a:hover  {
     text-decoration: none;
+}
+
+button {
+	-ms-user-select: none;
+	user-select: none;
 }

@@ -10,6 +10,10 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 const sneak = $(".player")
 const sneakBtn = $(".sneak-btn")
+const sneakW = $(".sneak-w")
+const sneakA = $(".sneak-a")
+const sneakS = $(".sneak-s")
+const sneakD = $(".sneak-d")
 let sneakY = parseInt(sneak.css("grid-column"))
 let sneakX = parseInt(sneak.css("grid-row"))
 const apple = $(".apple")
@@ -28,7 +32,11 @@ function takeApple() {
 }
 
 function move() {
-  $(document).one("keydown", (event) => { data = event.key });
+  sneakW.one("click", () => data = "w");
+  sneakA.one("click", () => data = "a");
+  sneakS.one("click", () => data = "s");
+  sneakD.one("click", () => data = "d");
+  $(document).one("keydown", (event) => data = event.key);
   return data
 }
 
@@ -65,8 +73,9 @@ sneakBtn.click(() => {
     if (sneakX <= 0 || sneakX >= 17 || sneakY <= 0 || sneakY >= 17 || gameStop == true) {
       sneakY = 2
       sneakX = 2
-      sneakBtn.text("Start")
       score = 0
+      scoreHTML.text(`${score}`)
+      sneakBtn.text("Start")
       apple.hide()
       gameStop = false
       data = "d"
