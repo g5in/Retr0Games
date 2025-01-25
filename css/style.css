@@ -61,8 +61,8 @@ header {
     position: relative;
     bottom: 0;
     display: inline-block;
-    transform: rotateZ(270deg);
-    width: 20px;
+    transform: rotate(270deg);
+    width: 24px;
 }
 
 .nav {
@@ -103,7 +103,7 @@ header {
 
 
 .hero {
-    height: calc(100vh - 150px);
+    height: max(calc(100vh - 150px), 500px);
     padding: 50px 0;
 }
 
@@ -230,7 +230,7 @@ header {
     border-radius: 0.1rem;
 }
 
-.player {
+.player, .player-tail {
     background-color: tomato;
     border-radius: 0.5rem;
     grid-column: 2;
