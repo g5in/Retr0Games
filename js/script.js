@@ -18,6 +18,7 @@ let sneakY = parseInt(sneak.css("grid-column"))
 let sneakX = parseInt(sneak.css("grid-row"))
 let sneakSteps = [];
 let sneakCells = [sneak]
+let sneakTailColor = 10
 let i = 0
 const apple = $(".apple")
 let appleY = parseInt(apple.css("grid-column"))
@@ -50,7 +51,25 @@ function move() {
 function sneakTail() {
   sneakCells.push($('<div class = "player-tail"></div>').appendTo($(".sneak-place")))
   sneakCells[score].css("grid-column", `${sneakSteps[sneakSteps.length - score - 1].x}`)
-  sneakCells[score].css("grid-row", `${sneakSteps[sneakSteps.length - score - 1].y}`);
+  sneakCells[score].css("grid-row", `${sneakSteps[sneakSteps.length - score - 1].y}`)
+  sneakCells[score].css("background-color", `rgb(${255-sneakTailColor}, 99, 71)`);
+  sneakTailColor+= 20
+}
+
+function gameOver() {
+  sneakY = 2
+  sneakX = 1
+  score = 0
+  scoreHTML.text(`${score}`)
+  sneakBtn.text("Start")
+  apple.hide()
+  gameStop = false
+  data = "d"
+  sneakTailColor = 10
+  $(".player-tail").remove()
+  sneakSteps = [];
+  sneakCells = [sneak]
+  alert("GameOver")
 }
 
 //player moves
@@ -85,24 +104,16 @@ sneakBtn.click(() => {
     })
     i = 0
     if (sneakSteps.length > score + 2) sneakSteps.shift();
-    console.log(sneakCells)
     if (sneakX == appleX && sneakY == appleY) {
       takeApple()
     }
+    sneakSteps.reverse().forEach((element, index, sneakSteps) => {
+      if (element.x == sneakX && element.y == sneakY && index > 3) gameStop = true;
+    })
+    sneakSteps.reverse()
     // sneakBtn.one("click", () => gameStop = true )
     if (sneakX <= 0 || sneakX >= 17 || sneakY <= 0 || sneakY >= 17 || gameStop == true) {
-      sneakY = 2
-      sneakX = 1
-      score = 0
-      scoreHTML.text(`${score}`)
-      sneakBtn.text("Start")
-      apple.hide()
-      gameStop = false
-      data = "d"
-      $(".player-tail").remove()
-      sneakSteps = [];
-      sneakCells = [sneak]
-      alert("GameOver")
+      gameOver()
       setTimeout(() => clearInterval(timerId), 10)
     }
     apple.css("grid-row", `${appleY}`)
