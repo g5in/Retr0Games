@@ -14,19 +14,22 @@ const sneakW = $(".sneak-w")
 const sneakA = $(".sneak-a")
 const sneakS = $(".sneak-s")
 const sneakD = $(".sneak-d")
-let sneakY = parseInt(sneak.css("grid-column"))
-let sneakX = parseInt(sneak.css("grid-row"))
+let sneakCoordY = parseInt(sneak.css("grid-column"))
+let sneakCoordX = parseInt(sneak.css("grid-row"))
 let sneakSteps = [];
 let sneakCells = [sneak]
 let sneakTailColor = 10
-let i = 0
+
 const apple = $(".apple")
 let appleY = parseInt(apple.css("grid-column"))
 let appleX = parseInt(apple.css("grid-row"))
+
 let scoreHTML = $(".score span")
 let score = 0
-let gameStop = false
+let gameStop = true
+let i = 0
 let data = "d"
+let timerId
 
 function takeApple() {
   appleX = Math.floor(Math.random() * 17);
@@ -57,46 +60,51 @@ function sneakTail() {
 }
 
 function gameOver() {
-  sneakY = 2
-  sneakX = 1
+  sneakCoordY = 2
+  sneakCoordX = 1
   score = 0
+  i = 0
   scoreHTML.text(`${score}`)
   sneakBtn.text("Start")
   apple.hide()
-  gameStop = false
+  gameStop = true
   data = "d"
   sneakTailColor = 10
   $(".player-tail").remove()
   sneakSteps = [];
   sneakCells = [sneak]
   alert("GameOver")
+  setTimeout(() => clearInterval(timerId), 10)
 }
+
 
 //player moves
 apple.hide()
 sneakBtn.click(() => {
-  sneakBtn.text('Stop')
+  if (gameStop == true) {
+    sneakBtn.text('Stop')
+    gameStop = false
   appleX = Math.floor(Math.random() * 17);
   appleY = Math.floor(Math.random() * 17);
   apple.show()
-  const timerId = setInterval(() => {
+  timerId = setInterval(() => {
     switch (move()) {
       case "w":
-        sneakY--
+        sneakCoordY--
         break;
       case "a":
-        sneakX--
+        sneakCoordX--
         break;
       case "s":
-        sneakY++
+        sneakCoordY++
         break;
       case "d":
-        sneakX++
+        sneakCoordX++
         break;
       default:
         break;
     }
-    sneakSteps.push({ 'x': sneakX, 'y': sneakY })
+    sneakSteps.push({ 'x': sneakCoordX, 'y': sneakCoordY })
     sneakCells.forEach((element) => {
       element.css("grid-column", `${sneakSteps[sneakSteps.length - i - 1].x}`)
       element.css("grid-row", `${sneakSteps[sneakSteps.length - i - 1].y}`)
@@ -104,19 +112,20 @@ sneakBtn.click(() => {
     })
     i = 0
     if (sneakSteps.length > score + 2) sneakSteps.shift();
-    if (sneakX == appleX && sneakY == appleY) {
+    if (sneakCoordX == appleX && sneakCoordY == appleY) {
       takeApple()
     }
     sneakSteps.reverse().forEach((element, index, sneakSteps) => {
-      if (element.x == sneakX && element.y == sneakY && index > 3) gameStop = true;
+      if (element.x == sneakCoordX && element.y == sneakCoordY && index > 3) i = 1;
     })
     sneakSteps.reverse()
-    // sneakBtn.one("click", () => gameStop = true )
-    if (sneakX <= 0 || sneakX >= 17 || sneakY <= 0 || sneakY >= 17 || gameStop == true) {
+    if (sneakCoordX <= 0 || sneakCoordX >= 17 || sneakCoordY <= 0 || sneakCoordY >= 17 || i == 1) {
       gameOver()
-      setTimeout(() => clearInterval(timerId), 10)
     }
     apple.css("grid-row", `${appleY}`)
     apple.css("grid-column", `${appleX}`)
-  }, 250)
+  }, 300)
+  } else {
+    gameOver()
+  }
 })
