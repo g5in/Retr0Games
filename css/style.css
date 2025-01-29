@@ -70,6 +70,7 @@ header {
     width: 400px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     font-size: 25px;
 }
 
@@ -104,8 +105,13 @@ header {
 
 
 .hero {
-    height: calc(100vh - 150px);
+    height: 550px;
     padding-top: 50px;
+}
+
+.hero-arrowL,
+.hero-arrowR {
+    display: none;
 }
 
 .hero__inner {
@@ -127,6 +133,7 @@ header {
     width: 100%;
     display: flex;
     justify-content: space-between;
+    transition: 200ms ease-in-out all;
 }
 
 .hero__inner p {
@@ -137,12 +144,12 @@ header {
 
 .sneak {
     height: 600px;
-    margin-top: 42px;
+    padding-top: 42px
 }
 
 .sneak__inner {
     position: relative;
-    height: 600px;
+    height: 100%;
     padding: 25px 0;
     display: flex;
     justify-content: space-between;
@@ -203,7 +210,7 @@ header {
     background-color: black;
     border: 3px solid forestgreen;
     transition: 300ms ease-in-out;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .sneak-btn:is(:hover, :focus-visible) {
@@ -211,7 +218,7 @@ header {
     height: 50px;
     font-size: 25px;
     transition: 300ms ease-in-out;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
     animation: sneak-btn 2s infinite alternate ease-in-out;
 }
 
@@ -365,12 +372,6 @@ footer {
     justify-content: space-between;
 }
 
-@media screen and (height > 750px) {
-    .hero {
-        height: 550px;
-    }
-}
-
 @media screen and (920px < width < 1270px) {
     .container {
         width: 880px;
@@ -391,7 +392,7 @@ footer {
     }
 
     .sneak__right {
-        width: 45%;
+        width: 35%;
         align-items: center;
         padding-right: 30px;
     }
@@ -415,15 +416,7 @@ footer {
     .nav {
         width: 200px;
         height: 100px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
         flex-direction: column;
-        font-size: 25px;
-    }
-
-    .nav li a {
-        transition: 200ms ease;
     }
 
     .nav li:is(:not(:first-child, :last-child),
@@ -431,7 +424,7 @@ footer {
         color: forestgreen;
         font-size: 35px;
         transition: 200ms ease;
-        text-shadow: 0 13px lawngreen;
+        text-shadow: 13px 13px lawngreen;
     }
 
     .hero__cards {
@@ -446,219 +439,178 @@ footer {
         font-size: 23px;
     }
 
-
     .sneak {
-        height: 600px;
-        margin-top: 42px;
+        height: 800px;
     }
 
     .sneak__inner {
-        position: relative;
-        height: 600px;
-        padding: 25px 0;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        border: 2px solid forestgreen;
-    }
-
-    .sneak__inner::before {
-        content: "_Sneak__";
-        position: absolute;
-        font-size: 42px;
-        z-index: 11;
-        top: -42px;
+        flex-direction: column;
+        padding: 25px;
     }
 
     .sneak__left,
     .sneak__right {
+        width: 100%;
+    }
+
+    .sneak__left {
+        height: 77%;
+    }
+
+    .sneak__right {
+        height: 23%;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+    }
+
+    .score {
+        position: relative;
+        right: 90px;
+        align-self: flex-start;
+    }
+
+    .sneak-info::after {
+        left: 250px;
+        top: 50px;
+    }
+}
+
+@media screen and (width < 600px) {
+    .container {
+        height: 100%;
+        width: 300px;
+        margin: 0 auto;
+    }
+
+    .nav {
+        width: 100px;
+        height: 100px;
+        flex-direction: column;
+    }
+
+    .nav li a {
+        font-size: 20px;
+    }
+
+    .nav li:is(:not(:first-child, :last-child),
+        :first-child, :last-child) a:is(:hover, :focus-visible) {
+        font-size: 25px;
+        text-shadow: 13px 13px lawngreen;
+    }
+
+    .hero {
+        height: 350px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hero-arrowL {
+        left: 30px;
+    }
+
+    .hero-arrowL:is(:hover, :focus-visible) {
+        left: 25px;
+        color: rgb(15, 87, 15);
+        font-size: 30px;
+        transition: 100ms all ease-in-out;
+    }
+
+    .hero-arrowL:active {
+        left: 35px;
+        color: rgb(15, 87, 15);
+        font-size: 20px;
+        transition: 100ms all ease-in-out;
+    }
+
+    .hero-arrowR {
+        right: 30px;
+    }
+
+    .hero-arrowR:is(:hover, :focus-visible) {
+        right: 25px;
+        color: rgb(15, 87, 15);
+        font-size: 30px;
+        transition: 100ms all ease-in-out;
+    }
+
+    .hero-arrowR:active {
+        right: 35px;
+        color: rgb(15, 87, 15);
+        font-size: 20px;
+        transition: 100ms all ease-in-out;
+    }
+
+    .hero-arrowL,
+    .hero-arrowR {
+        display: inline-block;
+        position: absolute;
+        z-index: 20;
+        height: 30px;
+        width: 30px;
+        top: 55%;
+        color: forestgreen;
+        background-color: transparent;
+        font-size: 25px;
+        transition: 100ms all ease-in-out;
+    }
+
+    .hero__inner {
+        height: 100%;
+    }
+
+    .hero__cards {
+        position: relative;
+        left: 50px;
+        height: calc(100% - 83px);
+        width: 1400px;
         display: flex;
         justify-content: space-between;
-        align-items: center;
+    }
+
+    .sneak {
+        height: 700px;
+    }
+
+    .sneak__inner {
+        padding: 18px;
         flex-direction: column;
-        position: relative;
-        height: 100%;
-        width: 50%;
+    }
+
+    .sneak__left,
+    .sneak__right {
+        height: 55%;
+        width: 100%;
     }
 
     .sneak__right {
         justify-content: flex-start;
+        height: 45%;
+        margin-top: 15px;
     }
 
     .sneak-place,
     .cells {
-        height: 445px;
-        width: 445px;
-        display: grid;
-        grid-template-columns: repeat(16, 25px);
-        grid-template-rows: repeat(16, 25px);
-        gap: 3px;
-    }
-
-    .sneak-place {
-        z-index: 10;
-    }
-
-    .cells {
-        position: absolute;
-        top: 0;
-        background-color: black;
-    }
-
-    .sneak-btn {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100px;
-        height: 35px;
-        font-size: 20px;
-        background-color: black;
-        border: 3px solid forestgreen;
-        transition: 300ms ease-in-out;
-        margin-bottom: 20px;
-    }
-
-    .sneak-btn:is(:hover, :focus-visible) {
-        width: 125px;
-        height: 50px;
-        font-size: 25px;
-        transition: 300ms ease-in-out;
-        margin-bottom: 10px;
-        animation: sneak-btn 2s infinite alternate ease-in-out;
-    }
-
-    @keyframes sneak-btn {
-        50% {
-            transform: rotate(20deg);
-        }
-
-        100% {
-            transform: rotate(-20deg);
-        }
-    }
-
-    .sneak-btn:active {
-        width: 80px;
-        height: 30px;
-        font-size: 20px;
-        animation: none;
-        transform: rotate(0);
-        transition: 300ms ease-in-out;
+        height: 260px;
+        width: 260px;
+        grid-template-columns: repeat(16, 15.3125px);
+        grid-template-rows: repeat(16, 15.3125px);
+        gap: 1px;
     }
 
     .cell,
     .player {
-        height: 25px;
-        width: 25px;
-        background-color: forestgreen;
-        border-radius: 0.1rem;
-    }
-
-    .player,
-    .player-tail {
-        background-color: rgb(255, 99, 71);
-        border-radius: 0.5rem;
-        grid-column: 2;
-        grid-row: 2;
-        z-index: 11;
-        transition: all 200ms ease-in-out;
-    }
-
-    .apple {
-        background-color: crimson;
-        border-radius: 0.5rem;
-        grid-column: 2;
-        grid-row: 2;
-    }
-
-    .score {
-        font-size: 36px;
-        animation: sneak-score 2.5s infinite alternate ease-in-out;
-        margin-bottom: 20px;
-    }
-
-    @keyframes sneak-score {
-        50% {
-            transform: rotate(15deg);
-        }
-
-        100% {
-            transform: rotate(-15deg);
-        }
+        height: 15.3125px;
+        width: 15.3125px;
     }
 
     .sneak-info {
-        position: relative;
-        height: 115px;
-        width: 185px;
-        align-self: start;
-        display: grid;
-        grid-template-columns: repeat(3, 50px);
-        grid-template-rows: repeat(2, 50px);
-        gap: 20px;
+        align-self: center;
     }
 
     .sneak-info::after {
-        content: "Click buttons or keyboard for moving!";
-        position: absolute;
-        left: 250px;
+        left: -40px;
+        bottom: -100px;
         font-size: 28px;
-        width: 200px;
-    }
-
-    .sneak-key {
-        position: relative;
-        top: 0;
-        left: 0;
-        height: 50px;
-        width: 50px;
-        font-size: 20px;
-        background-color: black;
-        border: 1px solid forestgreen;
-        box-shadow: forestgreen 10px 10px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        -ms-user-select: none;
-        user-select: none;
-        transition: 100ms all ease-in-out;
-    }
-
-    .sneak-key:is(:hover, :focus-visible) {
-        font-size: 24px;
-        height: 53px;
-        width: 53px;
-        border: 1px solid forestgreen;
-        box-shadow: forestgreen 10px 10px;
-        transition: 100ms all ease-in-out;
-    }
-
-    .sneak-key:active {
-        height: 50px;
-        width: 50px;
-        top: 5px;
-        left: 5px;
-        border: 1px solid rgb(16, 109, 16);
-        box-shadow: rgb(16, 109, 16) 5px 5px;
-        transition: 100ms all ease-in-out;
-    }
-
-    .sneak-w {
-        grid-column: 2;
-    }
-
-    .sneak-a {
-        grid-column: 1;
-        grid-row: 2;
-    }
-
-    .sneak-s {
-        grid-column: 2;
-        grid-row: 2;
-    }
-
-    .sneak-d {
-        grid-column: 3;
-        grid-row: 2;
+        width: 300px;
     }
 }

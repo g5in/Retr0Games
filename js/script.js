@@ -8,6 +8,8 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
+/////////////////////sneak
+
 const sneak = $(".player")
 const sneakBtn = $(".sneak-btn")
 const sneakW = $(".sneak-w")
@@ -55,8 +57,8 @@ function sneakTail() {
   sneakCells.push($('<div class = "player-tail"></div>').appendTo($(".sneak-place")))
   sneakCells[score].css("grid-column", `${sneakSteps[sneakSteps.length - score - 1].x}`)
   sneakCells[score].css("grid-row", `${sneakSteps[sneakSteps.length - score - 1].y}`)
-  sneakCells[score].css("background-color", `rgb(${255-sneakTailColor}, 99, 71)`);
-  sneakTailColor+= 20
+  sneakCells[score].css("background-color", `rgb(${255 - sneakTailColor}, 99, 71)`);
+  sneakTailColor += 20
 }
 
 function gameOver() {
@@ -84,48 +86,70 @@ sneakBtn.click(() => {
   if (gameStop == true) {
     sneakBtn.text('Stop')
     gameStop = false
-  appleX = Math.floor(Math.random() * 17);
-  appleY = Math.floor(Math.random() * 17);
-  apple.show()
-  timerId = setInterval(() => {
-    switch (move()) {
-      case "w":
-        sneakCoordY--
-        break;
-      case "a":
-        sneakCoordX--
-        break;
-      case "s":
-        sneakCoordY++
-        break;
-      case "d":
-        sneakCoordX++
-        break;
-      default:
-        break;
-    }
-    sneakSteps.push({ 'x': sneakCoordX, 'y': sneakCoordY })
-    sneakCells.forEach((element) => {
-      element.css("grid-column", `${sneakSteps[sneakSteps.length - i - 1].x}`)
-      element.css("grid-row", `${sneakSteps[sneakSteps.length - i - 1].y}`)
-      i++
-    })
-    i = 0
-    if (sneakSteps.length > score + 2) sneakSteps.shift();
-    if (sneakCoordX == appleX && sneakCoordY == appleY) {
-      takeApple()
-    }
-    sneakSteps.reverse().forEach((element, index, sneakSteps) => {
-      if (element.x == sneakCoordX && element.y == sneakCoordY && index > 3) i = 1;
-    })
-    sneakSteps.reverse()
-    if (sneakCoordX <= 0 || sneakCoordX >= 17 || sneakCoordY <= 0 || sneakCoordY >= 17 || i == 1) {
-      gameOver()
-    }
-    apple.css("grid-row", `${appleY}`)
-    apple.css("grid-column", `${appleX}`)
-  }, 300)
+    appleX = Math.floor(Math.random() * 17);
+    appleY = Math.floor(Math.random() * 17);
+    apple.show()
+    timerId = setInterval(() => {
+      switch (move()) {
+        case "w":
+          sneakCoordY--
+          break;
+        case "a":
+          sneakCoordX--
+          break;
+        case "s":
+          sneakCoordY++
+          break;
+        case "d":
+          sneakCoordX++
+          break;
+        default:
+          break;
+      }
+      sneakSteps.push({ 'x': sneakCoordX, 'y': sneakCoordY })
+      sneakCells.forEach((element) => {
+        element.css("grid-column", `${sneakSteps[sneakSteps.length - i - 1].x}`)
+        element.css("grid-row", `${sneakSteps[sneakSteps.length - i - 1].y}`)
+        i++
+      })
+      i = 0
+      if (sneakSteps.length > score + 2) sneakSteps.shift();
+      if (sneakCoordX == appleX && sneakCoordY == appleY) {
+        takeApple()
+      }
+      sneakSteps.reverse().forEach((element, index, sneakSteps) => {
+        if (element.x == sneakCoordX && element.y == sneakCoordY && index > 3) i = 1;
+      })
+      sneakSteps.reverse()
+      if (sneakCoordX <= 0 || sneakCoordX >= 17 || sneakCoordY <= 0 || sneakCoordY >= 17 || i == 1) {
+        gameOver()
+      }
+      apple.css("grid-row", `${appleY}`)
+      apple.css("grid-column", `${appleX}`)
+    }, 300)
   } else {
     gameOver()
+  }
+})
+
+/////////////////////////////////////hero-wrapper
+const heroWrapper = $(".hero__cards")
+const heroArrowL = $(".hero-arrowL")
+const heroArrowR = $(".hero-arrowR")
+let heroTranslate = 0
+
+heroArrowL.click(() => {
+  if (heroTranslate + 400 <= 0) {
+    heroTranslate += 400
+    heroWrapper.css("transform", `translate(${heroTranslate}px)`)
+    console.log(heroTranslate)
+  }
+})
+
+heroArrowR.click(() => {
+  if (heroTranslate - 400 >= -1200) {
+    heroTranslate -= 400
+    heroWrapper.css("transform", `translate(${heroTranslate}px)`)
+    console.log(heroTranslate)
   }
 })
