@@ -1,3 +1,5 @@
+// import { ucs2 } from './node-modules/punycode/';
+
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function (e) {
     e.preventDefault();
@@ -8,7 +10,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-/////////////////////sneak
+////////////////////////////////////////////////////////////////sneak
 
 const sneak = $(".player")
 const sneakBtn = $(".sneak-btn")
@@ -18,50 +20,22 @@ const sneakS = $(".sneak-s")
 const sneakD = $(".sneak-d")
 let sneakCoordY = parseInt(sneak.css("grid-column"))
 let sneakCoordX = parseInt(sneak.css("grid-row"))
-let sneakSteps = [];
-let sneakCells = [sneak]
-let sneakTailColor = 10
+let sneakSteps = [];        //array of step coord
+let sneakCells = [sneak]    //array of tail coord
+let SneakTailColor = 10
 
 const apple = $(".apple")
-let appleY = parseInt(apple.css("grid-column"))
-let appleX = parseInt(apple.css("grid-row"))
+let appleCoordY = parseInt(apple.css("grid-column"))
+let appleCoordX = parseInt(apple.css("grid-row"))
 
 let scoreHTML = $(".score span")
 let score = 0
 let gameStop = true
-let i = 0
-let data = "d"
+let i = 0           // this var for help
+let sneakDirection = "d"
 let timerId
 
-function takeApple() {
-  appleX = Math.floor(Math.random() * 17);
-  appleY = Math.floor(Math.random() * 17);
-  score++
-  scoreHTML.text(`${score}`)
-  sneakTail()
-}
-
-function move() {
-  sneakW.one("click", () => data != "s" ? data = "w" : data = data);
-  sneakA.one("click", () => data != "d" ? data = "a" : data = data);
-  sneakS.one("click", () => data != "w" ? data = "s" : data = data);
-  sneakD.one("click", () => data != "a" ? data = "d" : data = data);
-  $(document).one("keydown", (event) => {
-    if (event.key == "a" && data != "d" || event.key == "d" && data != "a" || event.key == "w" && data != "s" || event.key == "s" && data != "w") data = event.key
-    else data = data
-  });
-  return data
-}
-
-function sneakTail() {
-  sneakCells.push($('<div class = "player-tail"></div>').appendTo($(".sneak-place")))
-  sneakCells[score].css("grid-column", `${sneakSteps[sneakSteps.length - score - 1].x}`)
-  sneakCells[score].css("grid-row", `${sneakSteps[sneakSteps.length - score - 1].y}`)
-  sneakCells[score].css("background-color", `rgb(${255 - sneakTailColor}, 99, 71)`);
-  sneakTailColor += 20
-}
-
-function gameOver() {
+function Win() {
   sneakCoordY = 2
   sneakCoordX = 1
   score = 0
@@ -70,8 +44,63 @@ function gameOver() {
   sneakBtn.text("Start")
   apple.hide()
   gameStop = true
-  data = "d"
-  sneakTailColor = 10
+  sneakDirection = "d"
+  SneakTailColor = 10
+  $(".player-tail").remove()
+  sneakSteps = [];
+  sneakCells = [sneak]
+  alert("You Win!")
+  setTimeout(() => clearInterval(timerId), 10)
+}
+
+function Move() {
+  sneakW.one("click", () => sneakDirection != "s" ? sneakDirection = "w" : sneakDirection = sneakDirection);
+  sneakA.one("click", () => sneakDirection != "d" ? sneakDirection = "a" : sneakDirection = sneakDirection);
+  sneakS.one("click", () => sneakDirection != "w" ? sneakDirection = "s" : sneakDirection = sneakDirection);
+  sneakD.one("click", () => sneakDirection != "a" ? sneakDirection = "d" : sneakDirection = sneakDirection);
+  $(document).one("keydown", (event) => {
+    let e = event.key;
+    e == "W" || e == "ц" || e == "Ц" ? e = "w" :
+      e == "A" || e == "ф" || e == "Ф" ? e = "a" :
+        e == "S" || e == "ы" || e == "Ы" ? e = "s" :
+          e == "D" || e == "в" || e == "В" ? e = "d" : e = e;
+    if (e == "a" && sneakDirection != "d" || e == "d" && sneakDirection != "a"
+      || e == "w" && sneakDirection != "s" || e == "s" && sneakDirection != "w") sneakDirection = e
+    else sneakDirection = sneakDirection
+
+  });
+  return sneakDirection
+}
+
+function TakeApple() {
+  if (sneakCoordX == appleCoordX && sneakCoordY == appleCoordY) {
+    appleCoordX = Math.floor(Math.random() * 16) + 1;
+    appleCoordY = Math.floor(Math.random() * 16) + 1;
+    score++
+    scoreHTML.text(`${score}`)
+    SneakTail()
+  }
+}
+
+function SneakTail() {
+  sneakCells.push($('<div class = "player-tail"></div>').appendTo($(".sneak-place")))
+  sneakCells[score].css("grid-column", `${sneakSteps[sneakSteps.length - score - 1].x}`)
+  sneakCells[score].css("grid-row", `${sneakSteps[sneakSteps.length - score - 1].y}`)
+  sneakCells[score].css("background-color", `rgb(${255 - SneakTailColor}, 99, 71)`);
+  SneakTailColor += 20
+}
+
+function GameOver() {
+  sneakCoordY = 2
+  sneakCoordX = 1
+  score = 0
+  i = 0
+  scoreHTML.text(`${score}`)
+  sneakBtn.text("Start")
+  apple.hide()
+  gameStop = true
+  sneakDirection = "d"
+  SneakTailColor = 10
   $(".player-tail").remove()
   sneakSteps = [];
   sneakCells = [sneak]
@@ -80,17 +109,18 @@ function gameOver() {
 }
 
 
-//player moves
+//player Moves
 apple.hide()
 sneakBtn.click(() => {
   if (gameStop == true) {
     sneakBtn.text('Stop')
     gameStop = false
-    appleX = Math.floor(Math.random() * 17);
-    appleY = Math.floor(Math.random() * 17);
+    appleCoordX = Math.floor(Math.random() * 16) + 1;
+    appleCoordY = Math.floor(Math.random() * 16) + 1;
     apple.show()
     timerId = setInterval(() => {
-      switch (move()) {
+      if (sneakCells.length == 30) Win()
+      switch (Move()) {
         case "w":
           sneakCoordY--
           break;
@@ -106,6 +136,7 @@ sneakBtn.click(() => {
         default:
           break;
       }
+      TakeApple()
       sneakSteps.push({ 'x': sneakCoordX, 'y': sneakCoordY })
       sneakCells.forEach((element) => {
         element.css("grid-column", `${sneakSteps[sneakSteps.length - i - 1].x}`)
@@ -114,25 +145,23 @@ sneakBtn.click(() => {
       })
       i = 0
       if (sneakSteps.length > score + 2) sneakSteps.shift();
-      if (sneakCoordX == appleX && sneakCoordY == appleY) {
-        takeApple()
-      }
+      // console.log(punycode.ucs2.decode(sneakDirection))
+
       sneakSteps.reverse().forEach((element, index, sneakSteps) => {
         if (element.x == sneakCoordX && element.y == sneakCoordY && index > 3) i = 1;
       })
       sneakSteps.reverse()
-      if (sneakCoordX <= 0 || sneakCoordX >= 17 || sneakCoordY <= 0 || sneakCoordY >= 17 || i == 1) {
-        gameOver()
-      }
-      apple.css("grid-row", `${appleY}`)
-      apple.css("grid-column", `${appleX}`)
-    }, 300)
+
+      if (sneakCoordX <= 0 || sneakCoordX >= 17 || sneakCoordY <= 0 || sneakCoordY >= 17 || i == 1) GameOver()
+      apple.css("grid-row", `${appleCoordY}`)
+      apple.css("grid-column", `${appleCoordX}`)
+    }, 290)
   } else {
-    gameOver()
+    GameOver()
   }
 })
 
-/////////////////////////////////////hero-wrapper
+/////////////////////////////////////////////////////////hero-wrapper
 const heroWrapper = $(".hero__cards")
 const heroArrowL = $(".hero-arrowL")
 const heroArrowR = $(".hero-arrowR")
@@ -150,6 +179,5 @@ heroArrowR.click(() => {
   if (heroTranslate - 400 >= -1200) {
     heroTranslate -= 400
     heroWrapper.css("transform", `translate(${heroTranslate}px)`)
-    console.log(heroTranslate)
   }
 })

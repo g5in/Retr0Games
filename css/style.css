@@ -133,7 +133,7 @@ header {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    transition: 200ms ease-in-out all;
+    transition: 600ms ease all;
 }
 
 .hero__inner p {
@@ -267,9 +267,10 @@ header {
 }
 
 .score {
+    position: relative;
     font-size: 36px;
     animation: sneak-score 2.5s infinite alternate ease-in-out;
-    margin-bottom: 20px;
+    margin-top: 10px;
 }
 
 @keyframes sneak-score {
@@ -284,6 +285,7 @@ header {
 
 .sneak-info {
     position: relative;
+    top: 40px;
     height: 115px;
     width: 185px;
     align-self: start;
@@ -398,7 +400,12 @@ footer {
     }
 
     .score {
+        right: 25px;
         margin-bottom: 40px;
+    }
+
+    .sneak-info {
+        top: 0;
     }
 
     .sneak-info::after {
@@ -464,8 +471,8 @@ footer {
     }
 
     .score {
-        position: relative;
-        right: 90px;
+        top: 10px;
+        right: 70px; 
         align-self: flex-start;
     }
 
@@ -603,7 +610,19 @@ footer {
         width: 15.3125px;
     }
 
+    .player,
+    .apple {
+        border-radius: 0.4rem;
+    }
+
+    .score {
+        position: relative;
+    }
+
     .sneak-info {
+        position: relative;
+        right: 10px;
+        top: 20px;
         align-self: center;
     }
 
