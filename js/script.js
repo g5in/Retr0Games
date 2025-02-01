@@ -1,5 +1,3 @@
-// import { ucs2 } from './node-modules/punycode/';
-
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function (e) {
     e.preventDefault();
@@ -145,8 +143,6 @@ sneakBtn.click(() => {
       })
       i = 0
       if (sneakSteps.length > score + 2) sneakSteps.shift();
-      // console.log(punycode.ucs2.decode(sneakDirection))
-
       sneakSteps.reverse().forEach((element, index, sneakSteps) => {
         if (element.x == sneakCoordX && element.y == sneakCoordY && index > 3) i = 1;
       })
