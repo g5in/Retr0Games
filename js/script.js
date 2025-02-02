@@ -20,7 +20,9 @@ let sneakCoordY = parseInt(sneak.css("grid-column"))
 let sneakCoordX = parseInt(sneak.css("grid-row"))
 let sneakSteps = [];        //array of step coord
 let sneakCells = [sneak]    //array of tail coord
-let SneakTailColor = 10
+let SneakTailColorR = 255
+let SneakTailColorG = 99
+let SneakTailColorB = 71
 
 const apple = $(".apple")
 let appleCoordY = parseInt(apple.css("grid-column"))
@@ -43,7 +45,9 @@ function Win() {
   apple.hide()
   gameStop = true
   sneakDirection = "d"
-  SneakTailColor = 10
+  SneakTailColorR = 255
+  SneakTailColorG = 99
+  SneakTailColorB = 71
   $(".player-tail").remove()
   sneakSteps = [];
   sneakCells = [sneak]
@@ -72,10 +76,24 @@ function Move() {
 
 function TakeApple() {
   if (sneakCoordX == appleCoordX && sneakCoordY == appleCoordY) {
-    appleCoordX = Math.floor(Math.random() * 16) + 1;
-    appleCoordY = Math.floor(Math.random() * 16) + 1;
     score++
     scoreHTML.text(`${score}`)
+    let x = Math.floor(Math.random() * 16) + 1;
+    let y = Math.floor(Math.random() * 16) + 1
+    while (i == 0) {
+      sneakSteps.forEach((element, index, sneakSteps) => {
+        if (element.x == x && element.y == y) {
+          x = Math.floor(Math.random() * 16) + 1;
+          y = Math.floor(Math.random() * 16) + 1;
+          i = 0
+          return
+        }
+        i = 1
+      });
+    }
+    i = 0
+    appleCoordX = x;
+    appleCoordY = y;
     SneakTail()
   }
 }
@@ -84,8 +102,9 @@ function SneakTail() {
   sneakCells.push($('<div class = "player-tail"></div>').appendTo($(".sneak-place")))
   sneakCells[score].css("grid-column", `${sneakSteps[sneakSteps.length - score - 1].x}`)
   sneakCells[score].css("grid-row", `${sneakSteps[sneakSteps.length - score - 1].y}`)
-  sneakCells[score].css("background-color", `rgb(${255 - SneakTailColor}, 99, 71)`);
-  SneakTailColor += 20
+  sneakCells[score].css("background-color", `rgb(${SneakTailColorR}, ${SneakTailColorG}, ${SneakTailColorB})`);
+  SneakTailColorR > 0 ? SneakTailColorR -= 20 :
+    SneakTailColorG > 0 ? SneakTailColorG -= 8 : SneakTailColorB -= 15
 }
 
 function GameOver() {
@@ -98,7 +117,9 @@ function GameOver() {
   apple.hide()
   gameStop = true
   sneakDirection = "d"
-  SneakTailColor = 10
+  SneakTailColorR = 255
+  SneakTailColorG = 99
+  SneakTailColorB = 71
   $(".player-tail").remove()
   sneakSteps = [];
   sneakCells = [sneak]
@@ -117,7 +138,7 @@ sneakBtn.click(() => {
     appleCoordY = Math.floor(Math.random() * 16) + 1;
     apple.show()
     timerId = setInterval(() => {
-      if (sneakCells.length == 30) Win()
+      if (score == 30) Win()
       switch (Move()) {
         case "w":
           sneakCoordY--
@@ -151,7 +172,7 @@ sneakBtn.click(() => {
       if (sneakCoordX <= 0 || sneakCoordX >= 17 || sneakCoordY <= 0 || sneakCoordY >= 17 || i == 1) GameOver()
       apple.css("grid-row", `${appleCoordY}`)
       apple.css("grid-column", `${appleCoordX}`)
-    }, 290)
+    }, 250)
   } else {
     GameOver()
   }

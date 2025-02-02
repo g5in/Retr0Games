@@ -433,6 +433,9 @@ footer {
         transition: 200ms ease;
         text-shadow: 13px 13px lawngreen;
     }
+    .hero {
+        height: 600px;
+    }
 
     .hero__cards {
         display: flex;
