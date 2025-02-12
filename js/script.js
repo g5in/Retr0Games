@@ -10,7 +10,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 ////////////////////////////////////////////////////////////////sneak
 
-const sneak = $(".player")
+const sneak = $(".sneak-player")
 const sneakBtn = $(".sneak-btn")
 const sneakW = $(".sneak-w")
 const sneakA = $(".sneak-a")
@@ -24,7 +24,7 @@ let SneakTailColorR = 255
 let SneakTailColorG = 99
 let SneakTailColorB = 71
 
-const apple = $(".apple")
+const apple = $(".sneak-apple")
 let appleCoordY = parseInt(apple.css("grid-column"))
 let appleCoordX = parseInt(apple.css("grid-row"))
 
@@ -48,7 +48,7 @@ function Win() {
   SneakTailColorR = 255
   SneakTailColorG = 99
   SneakTailColorB = 71
-  $(".player-tail").remove()
+  $(".sneak-player-tail").remove()
   sneakSteps = [];
   sneakCells = [sneak]
   alert("You Win!")
@@ -62,10 +62,10 @@ function Move() {
   sneakD.one("click", () => sneakDirection != "a" ? sneakDirection = "d" : sneakDirection = sneakDirection);
   $(document).one("keydown", (event) => {
     let e = event.key;
-    e == "W" || e == "ц" || e == "Ц" ? e = "w" :
-      e == "A" || e == "ф" || e == "Ф" ? e = "a" :
-        e == "S" || e == "ы" || e == "Ы" ? e = "s" :
-          e == "D" || e == "в" || e == "В" ? e = "d" : e = e;
+    e == "W" || e == "ц" || e == "Ц" || e == "ArrowUp" ? e = "w" :
+      e == "A" || e == "ф" || e == "Ф" || e == "ArrowLeft" ? e = "a" :
+        e == "S" || e == "ы" || e == "Ы" || e == "ArrowDown" ? e = "s" :
+          e == "D" || e == "в" || e == "В" || e == "ArrowRight" ? e = "d" : e = e;
     if (e == "a" && sneakDirection != "d" || e == "d" && sneakDirection != "a"
       || e == "w" && sneakDirection != "s" || e == "s" && sneakDirection != "w") sneakDirection = e
     else sneakDirection = sneakDirection
@@ -99,7 +99,7 @@ function TakeApple() {
 }
 
 function SneakTail() {
-  sneakCells.push($('<div class = "player-tail"></div>').appendTo($(".sneak-place")))
+  sneakCells.push($('<div class = "sneak-player-tail"></div>').appendTo($(".sneak-place")))
   sneakCells[score].css("grid-column", `${sneakSteps[sneakSteps.length - score - 1].x}`)
   sneakCells[score].css("grid-row", `${sneakSteps[sneakSteps.length - score - 1].y}`)
   sneakCells[score].css("background-color", `rgb(${SneakTailColorR}, ${SneakTailColorG}, ${SneakTailColorB})`);
@@ -120,7 +120,7 @@ function GameOver() {
   SneakTailColorR = 255
   SneakTailColorG = 99
   SneakTailColorB = 71
-  $(".player-tail").remove()
+  $(".sneak-player-tail").remove()
   sneakSteps = [];
   sneakCells = [sneak]
   alert("GameOver")
@@ -128,7 +128,7 @@ function GameOver() {
 }
 
 
-//player Moves
+//sneak-player Moves
 apple.hide()
 sneakBtn.click(() => {
   if (gameStop == true) {
@@ -172,7 +172,7 @@ sneakBtn.click(() => {
       if (sneakCoordX <= 0 || sneakCoordX >= 17 || sneakCoordY <= 0 || sneakCoordY >= 17 || i == 1) GameOver()
       apple.css("grid-row", `${appleCoordY}`)
       apple.css("grid-column", `${appleCoordX}`)
-    }, 250)
+    }, 300)
   } else {
     GameOver()
   }

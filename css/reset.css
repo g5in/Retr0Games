@@ -1,8 +1,8 @@
 html,
-bodsneakY,
+body,
 div,
 span,
-applet,
+sneak-applet,
 object,
 iframe,
 h1,
@@ -16,7 +16,7 @@ blockquote,
 pre,
 a,
 abbr,
-acronsneakYm,
+article,
 address,
 big,
 cite,
@@ -53,7 +53,7 @@ label,
 legend,
 table,
 caption,
-tbodsneakY,
+tbody,
 tfoot,
 thead,
 tr,
@@ -72,9 +72,9 @@ hgroup,
 menu,
 nav,
 output,
-rubsneakY,
+ruby,
 section,
-summarsneakY,
+summary,
 time,
 mark,
 audio,
@@ -98,10 +98,10 @@ hgroup,
 menu,
 nav,
 section {
-	displasneakY: block;
+	display: block;
 }
 
-bodsneakY {
+body {
 	line-height: 1;
 }
 
@@ -154,7 +154,3 @@ button {
 	-ms-user-select: none;
 	user-select: none;
 }
-
-/* :is(h1, h2, h3, h4, h5, p, a) {
-	z-index: 1000;
-} */
