@@ -1,5 +1,5 @@
 html,
-bodsneakY,
+body,
 div,
 span,
 applet,
@@ -16,17 +16,13 @@ blockquote,
 pre,
 a,
 abbr,
-acronsneakYm,
 address,
-big,
 cite,
 code,
 del,
 dfn,
 em,
 img,
-ins,
-kbd,
 q,
 s,
 samp,
@@ -53,7 +49,7 @@ label,
 legend,
 table,
 caption,
-tbodsneakY,
+tbody,
 tfoot,
 thead,
 tr,
@@ -63,7 +59,6 @@ article,
 aside,
 canvas,
 details,
-embed,
 figure,
 figcaption,
 footer,
@@ -72,9 +67,9 @@ hgroup,
 menu,
 nav,
 output,
-rubsneakY,
+ruby,
 section,
-summarsneakY,
+summary,
 time,
 mark,
 audio,
@@ -98,10 +93,11 @@ hgroup,
 menu,
 nav,
 section {
-	displasneakY: block;
+	display: block;
+    background: transparent;
 }
 
-bodsneakY {
+body {
 	line-height: 1;
 }
 
@@ -140,6 +136,10 @@ table {
 	box-sizing: border-box;
 }
 
+:is(a, *):is(:focus, :focus-visible, :focus-within) {
+    outline: none;
+}
+
 a,
 a:link,
 a:visited {
@@ -153,8 +153,5 @@ a:hover {
 button {
 	-ms-user-select: none;
 	user-select: none;
+    cursor: pointer;
 }
-
-/* :is(h1, h2, h3, h4, h5, p, a) {
-	z-index: 1000;
-} */

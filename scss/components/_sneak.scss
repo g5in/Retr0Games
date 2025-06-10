@@ -1,0 +1,338 @@
+.sneak {
+    height: 600px;
+    padding-top: 42px
+}
+
+.sneak__inner {
+    position: relative;
+    padding: 25px 0;
+    border: 2px solid forestgreen;
+    @include flex;
+
+    &::before {
+        content: "_Sneak__";
+        position: absolute;
+        font-size: 42px;
+        z-index: 11;
+        top: -42px;
+    }
+
+    .sneak__left,
+    .sneak__right {
+        position: relative;
+        height: 100%;
+        width: 50%;
+        @include flex(space-between, column, center)
+    }
+
+    .sneak__right {
+        justify-content: flex-start;
+    }
+
+    .sneak-place,
+    .cells {
+        height: 445px;
+        width: 445px;
+        display: grid;
+        grid-template-columns: repeat(16, 25px);
+        grid-template-rows: repeat(16, 25px);
+        gap: 3px;
+    }
+
+    .sneak-place {
+        z-index: 10;
+    }
+
+    .cells {
+        position: absolute;
+        top: 0;
+        background-color: black;
+    }
+
+    .cell,
+    .player {
+        height: 25px;
+        width: 25px;
+        background-color: forestgreen;
+        border-radius: 0.1rem;
+    }
+
+    .player,
+    .player-tail {
+        background-color: rgb(255, 99, 71);
+        border-radius: 0.5rem;
+        grid-column: 2;
+        grid-row: 2;
+        z-index: 11;
+    }
+
+    .apple {
+        background-color: crimson;
+        border-radius: 0.5rem;
+        grid-column: 2;
+        grid-row: 2;
+    }
+
+    .sneak-btn {
+        width: 100px;
+        height: 35px;
+        font-size: 20px;
+        background-color: black;
+        border: 3px solid forestgreen;
+        transition: 300ms ease-in-out;
+        margin-bottom: 10px;
+        @include flex(center, center);
+
+        &:is(:hover, :focus-visible) {
+            width: 125px;
+            height: 50px;
+            font-size: 25px;
+            margin-bottom: 0px;
+            animation: sneak-btn 2s infinite alternate ease-in-out;
+        }
+
+        &:active {
+            width: 80px;
+            height: 30px;
+            font-size: 20px;
+            animation: none;
+            transform: rotate(0);
+            transition: 300ms ease-in-out;
+        }
+
+        @keyframes sneak-btn {
+            50% {
+                transform: rotate(20deg);
+            }
+
+            100% {
+                transform: rotate(-20deg);
+            }
+        }
+    }
+
+    .score {
+        position: relative;
+        font-size: 36px;
+        animation: sneak-score 2.5s infinite alternate ease-in-out;
+        margin-top: 10px;
+    }
+
+    @keyframes sneak-score {
+        50% {
+            transform: rotate(15deg);
+        }
+
+        100% {
+            transform: rotate(-15deg);
+        }
+    }
+
+    .sneak-info {
+        position: relative;
+        top: 40px;
+        height: 115px;
+        width: 185px;
+        align-self: start;
+        display: grid;
+        grid-template-columns: repeat(3, 50px);
+        grid-template-rows: repeat(2, 50px);
+        gap: 20px;
+
+        &::after {
+            content: "Click buttons or keyboard for moving!";
+            position: absolute;
+            left: 250px;
+            font-size: 28px;
+            width: 200px;
+        }
+    }
+
+    .sneak-key {
+        position: relative;
+        top: 0;
+        left: 0;
+        height: 50px;
+        width: 50px;
+        font-size: 20px;
+        background-color: black;
+        border: 1px solid forestgreen;
+        box-shadow: forestgreen 10px 10px;
+        transition: 100ms all ease-in-out;
+        @include flex(center, center);
+
+        &:is(:hover, :focus-visible) {
+            font-size: 24px;
+            height: 53px;
+            width: 53px;
+            border: 1px solid forestgreen;
+            box-shadow: forestgreen 10px 10px;
+        }
+
+        &:active {
+            height: 50px;
+            width: 50px;
+            top: 5px;
+            left: 5px;
+            border: 1px solid rgb(16, 109, 16);
+            box-shadow: rgb(16, 109, 16) 5px 5px;
+        }
+    }
+
+    .sneak-w {
+        grid-column: 2;
+    }
+
+    .sneak-a {
+        grid-column: 1;
+        grid-row: 2;
+    }
+
+    .sneak-s {
+        grid-column: 2;
+        grid-row: 2;
+    }
+
+    .sneak-d {
+        grid-column: 3;
+        grid-row: 2;
+    }
+}
+
+@media screen and (920px < width < 1270px) {
+    .sneak {
+        height: 600px;
+    }
+
+    .sneak__inner {
+        height: 555px;
+        padding-bottom: 5px;
+
+        .sneak__left {
+            width: 65%;
+        }
+
+        .sneak__right {
+            width: 35%;
+            align-items: center;
+            padding-right: 30px;
+
+            .score {
+                right: 25px;
+                margin-bottom: 40px;
+            }
+
+            .sneak-info {
+                top: 0;
+
+                &::after {
+                    left: 0;
+                    top: 150px;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (600px < width < 920px) {
+    .sneak {
+        height: 800px;
+    }
+
+    .sneak__inner {
+        flex-direction: column;
+        padding: 25px;
+
+        .sneak__left,
+        .sneak__right {
+            width: 100%;
+        }
+
+        .sneak__left {
+            height: 77%;
+        }
+
+        .sneak__right {
+            height: 23%;
+            flex-direction: row-reverse;
+            justify-content: space-between;
+
+            .score {
+                top: 10px;
+                right: 70px;
+                align-self: flex-start;
+            }
+
+            .sneak-info::after {
+                left: 250px;
+                top: 50px;
+            }
+        }
+    }
+}
+
+@media screen and (width < 600px) {
+    .sneak {
+        height: 700px;
+    }
+
+    .sneak__inner {
+        padding: 18px;
+        flex-direction: column;
+
+        .sneak__left,
+        .sneak__right {
+            height: 55%;
+            width: 100%;
+        }
+
+        .sneak__left {
+
+            .sneak-place,
+            .cells {
+                height: 260px;
+                width: 260px;
+                grid-template-columns: repeat(16, 15.3125px);
+                grid-template-rows: repeat(16, 15.3125px);
+                gap: 1px;
+            }
+
+            .cell,
+            .player {
+                height: 15.3125px;
+                width: 15.3125px;
+            }
+
+            .player,
+            .apple {
+                border-radius: 0.4rem;
+            }
+        }
+
+        .sneak__right {
+            justify-content: flex-start;
+            height: 45%;
+            margin-top: 15px;
+
+            .score {
+                position: relative;
+            }
+
+            .sneak-info {
+                position: relative;
+                right: 10px;
+                top: 20px;
+                align-self: center;
+
+                &::after {
+                    content: "Click buttons for moving";
+                    left: -25px;
+                    bottom: -80px;
+                    font-size: 28px;
+                    letter-spacing: 0.5;
+                    width: 270px;
+                }
+            }
+        }
+    }
+}

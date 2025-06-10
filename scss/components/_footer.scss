@@ -1,0 +1,10 @@
+footer {
+    height: 250px;
+}
+
+.footer__inner {
+    height: 250px;
+    border-top: 5px solid forestgreen;
+    border-radius: 0.1rem;
+    @include flex;
+}

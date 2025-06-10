@@ -1,0 +1,115 @@
+.hero {
+    height: 550px;
+    padding-top: 50px;
+}
+
+.hero-arrowL,
+.hero-arrowR {
+    display: none;
+}
+
+.hero__inner {
+    h1 {
+        font-size: 35px;
+        padding-bottom: 5px;
+    }
+
+    h2 {
+        font-size: 28px;
+        padding-bottom: 15px;
+    }
+
+    .hero__cards {
+        height: calc(100% - 83px);
+        width: 100%;
+        transition: 600ms ease all;
+        @include flex(space-between, row, start);
+
+        p {
+            width: 200px;
+            font-size: 23px;
+        }
+    }
+}
+
+@media screen and (600px < width < 920px) {
+    .hero {
+        height: 600px;
+    }
+
+    .hero__cards {
+        justify-content: space-between;
+        align-content: space-around;
+        flex-wrap: wrap;
+
+        p {
+            width: 200px;
+            font-size: 23px;
+        }
+    }
+}
+
+@media screen and (width < 600px) {
+    .hero {
+        height: 350px;
+        position: relative;
+        overflow: hidden;
+
+        .hero-arrowL,
+        .hero-arrowR {
+            display: inline-block;
+            position: absolute;
+            z-index: 20;
+            height: 30px;
+            width: 30px;
+            top: 55%;
+            color: forestgreen;
+            background-color: transparent;
+            font-size: 25px;
+            transition: 100ms all ease-in-out;
+        }
+
+        .hero-arrowL {
+            left: 30px;
+
+            &:is(:hover, :focus-visible) {
+                left: 25px;
+                color: rgb(15, 87, 15);
+                font-size: 30px;
+            }
+
+            &:active {
+                left: 35px;
+                color: rgb(15, 87, 15);
+                font-size: 20px;
+            }
+
+        }
+
+        .hero-arrowR {
+            right: 30px;
+
+            &:is(:hover, :focus-visible) {
+                right: 25px;
+                color: rgb(15, 87, 15);
+                font-size: 30px;
+            }
+
+            &:active {
+                right: 35px;
+                color: rgb(15, 87, 15);
+                font-size: 20px;
+            }
+        }
+    }
+
+    .hero__inner {
+        .hero__cards {
+            position: relative;
+            left: 50px;
+            height: calc(100% - 93px);
+            width: 1400px;
+            justify-content: space-between;
+        }
+    }
+}

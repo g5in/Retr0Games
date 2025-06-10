@@ -1,0 +1,61 @@
+@mixin flex($jt-cntn : space-between, $flex-dir: row, $al-items: center) {
+    display: flex;
+    align-items: $al-items;
+    justify-content: $jt-cntn;
+    flex-direction: $flex-dir;
+}
+
+@import './reset';
+@import './vars';
+@import './components/header';
+@import './components/hero';
+@import './components/sneak';
+@import './components/footer';
+
+@font-face {
+    font-family: "Jersey 15";
+    src: url('../fonts/Jersey15-Regular.ttf');
+}
+
+
+
+*::selection {
+    background-color: white;
+}
+
+body {
+    background-color: black;
+    outline: none;
+    color: forestgreen;
+    font-family: "Jersey 15", serif;
+    font-weight: 400;
+}
+
+.container {
+    height: 100%;
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.inner {
+    height: 100%;
+}
+
+@media screen and (920px < width < 1270px) {
+    .container {
+        width: 880px;
+        margin: 0 auto;
+    }
+}
+
+@media screen and (600px < width < 920px) {
+    .container {
+        width: 540px;
+    }
+}
+
+@media screen and (width < 600px) {
+    .container {
+        width: 300px;
+    }
+}
