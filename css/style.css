@@ -1,3 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Jersey+15&display=swap');
+
+* {
+  color: forestgreen;
+  font-family: "Jersey 15";
+  font-weight: 400;
+}
+
 html,
 body,
 div,
@@ -158,8 +166,6 @@ button {
   user-select: none;
   cursor: pointer;
 }
-
-@import url('https://fonts.googleapis.com/css2?family=Jersey+15&display=swap');
 
 #header {
   height: 150px;
@@ -968,9 +974,6 @@ footer {
 body {
   background-color: black;
   outline: none;
-  color: forestgreen;
-  font-family: "Jersey 15", serif;
-  font-weight: 400;
 }
 
 .container {
