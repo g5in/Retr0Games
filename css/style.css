@@ -159,6 +159,8 @@ button {
   cursor: pointer;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Jersey+15&display=swap');
+
 #header {
   height: 150px;
 }
@@ -953,11 +955,6 @@ footer {
   -webkit-box-direction: normal;
   -ms-flex-direction: row;
   flex-direction: row;
-}
-
-@font-face {
-  font-family: "Jersey 15";
-  src: url("../fonts/Jersey15-Regular.ttf");
 }
 
 *::-moz-selection {
