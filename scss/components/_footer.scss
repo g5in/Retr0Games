@@ -1,5 +1,6 @@
 footer {
     height: 250px;
+    padding-top: 50px;
 }
 
 .footer__inner {
@@ -7,4 +8,8 @@ footer {
     border-top: 5px solid forestgreen;
     border-radius: 0.1rem;
     @include flex;
+
+    a {
+        color: forestgreen;
+    }
 }

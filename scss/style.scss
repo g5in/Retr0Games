@@ -54,6 +54,33 @@ body {
     overflow: hidden;
 }
 
+.header-logo {
+    color: forestgreen;
+    font-size: 40px;
+    transition: 200ms ease;
+
+    .logo-m {
+        position: relative;
+        bottom: 0;
+        display: inline-block;
+        transform: rotate(270deg);
+        width: 24px;
+    }
+
+    &:is(:hover, :focus-visible) {
+        text-shadow: 13px 13px lawngreen;
+        color: forestgreen;
+        font-size: 45px;
+    }
+
+    &:active {
+        text-shadow: none;
+        color: rgb(46, 160, 46);
+        font-size: 30px;
+        transition: 100ms ease;
+    }
+}
+
 @media screen and (920px < width < 1270px) {
     .container {
         width: 880px;

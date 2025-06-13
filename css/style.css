@@ -263,33 +263,8 @@ button {
       -ms-flex-direction: row;
           flex-direction: row;
 }
-.header__inner .header-logo {
-  color: forestgreen;
-  font-size: 40px;
-  -webkit-transition: 200ms ease;
-  transition: 200ms ease;
-}
-.header__inner .header-logo .logo-m {
-  position: relative;
-  bottom: 0;
-  display: inline-block;
-  -webkit-transform: rotate(270deg);
-          transform: rotate(270deg);
-  width: 24px;
-}
-.header__inner .header-logo:is(:hover, :focus-visible) {
-  text-shadow: 13px 13px lawngreen;
-  color: forestgreen;
-  font-size: 45px;
-}
-.header__inner .header-logo:active {
-  text-shadow: none;
-  color: rgb(46, 160, 46);
-  font-size: 30px;
-  -webkit-transition: 100ms ease;
-  transition: 100ms ease;
-}
-.header__inner .nav {
+
+.nav {
   width: 400px;
   font-size: 25px;
   display: -webkit-box;
@@ -306,35 +281,35 @@ button {
       -ms-flex-direction: row;
           flex-direction: row;
 }
-.header__inner .nav .nav-link {
+.nav .nav-link {
   color: forestgreen;
-  background: transparent;
+  background: transparent !important;
   -webkit-transition: 200ms ease;
   transition: 200ms ease;
 }
-.header__inner .nav .nav-link:is(:hover, :focus-visible) {
+.nav .nav-link:is(:hover, :focus-visible) {
   color: forestgreen;
   font-size: 35px;
 }
-.header__inner .nav .nav-link:active {
+.nav .nav-link:active {
   text-shadow: none;
   color: rgb(46, 160, 46);
   font-size: 20px;
   -webkit-transition: 100ms ease;
   transition: 100ms ease;
 }
-.header__inner .nav .nav-item:not(:first-child, :last-child) .nav-link:is(:hover, :focus-visible) {
+.nav .nav-item:not(:first-child, :last-child) .nav-link:is(:hover, :focus-visible) {
   text-shadow: 0 13px lawngreen;
 }
-.header__inner .nav .nav-item:first-child .nav-link:is(:hover, :focus-visible) {
+.nav .nav-item:first-child .nav-link:is(:hover, :focus-visible) {
   text-shadow: -13px 13px lawngreen;
 }
-.header__inner .nav .nav-item:last-child .nav-link:is(:hover, :focus-visible) {
+.nav .nav-item:last-child .nav-link:is(:hover, :focus-visible) {
   text-shadow: 13px 13px lawngreen;
 }
 
 @media screen and (600px < width < 920px) {
-  #header .nav {
+  .nav {
     width: 200px;
     height: 130px;
     -webkit-box-orient: vertical;
@@ -345,10 +320,10 @@ button {
         -ms-flex-pack: start;
             justify-content: flex-start;
   }
-  #header .nav .nav-link {
+  .nav .nav-link {
     height: 40px;
   }
-  #header .nav-item:is(:not(:first-child, :last-child),
+  .nav-item:is(:not(:first-child, :last-child),
   :first-child, :last-child) .nav-link:is(:hover, :focus-visible) {
     color: forestgreen;
     font-size: 35px;
@@ -361,17 +336,16 @@ button {
   .container {
     width: 300px;
   }
-  .header__inner .header-logo {
-    font-size: 35px;
+  .header-logo {
+    font-size: 35px !important;
   }
-  .header__inner .header-logo:is(:hover, :focus-visible) {
-    font-size: 38px;
+  .header-logo:is(:hover, :focus-visible) {
+    font-size: 38px !important;
   }
-  .header__inner .header-logo:active {
-    font-size: 28px;
-    text-shadow: 13px 13px lawngreen;
+  .header-logo:active {
+    font-size: 28px !important;
   }
-  .header__inner nav .nav {
+  nav .nav {
     width: 87px;
     height: 130px;
     display: -webkit-box;
@@ -388,11 +362,11 @@ button {
         -ms-flex-direction: column;
             flex-direction: column;
   }
-  .header__inner nav .nav .nav-link {
+  nav .nav .nav-link {
     height: 40px;
     font-size: 20px;
   }
-  .header__inner nav .nav .nav-item:is(:not(:first-child, :last-child),
+  nav .nav .nav-item:is(:not(:first-child, :last-child),
   :first-child, :last-child) .nav-link:is(:hover, :focus-visible) {
     font-size: 25px;
     text-shadow: 13px 13px lawngreen;
@@ -580,6 +554,7 @@ button {
   grid-template-rows: repeat(16, 25px);
   gap: 3px;
 }
+
 .sneak__inner .sneak-place {
   z-index: 10;
 }
@@ -926,6 +901,7 @@ button {
 }
 footer {
   height: 250px;
+  padding-top: 50px;
 }
 
 .footer__inner {
@@ -978,6 +954,33 @@ body {
 
 .scrollLock {
   overflow: hidden;
+}
+
+.header-logo {
+  color: forestgreen;
+  font-size: 40px;
+  -webkit-transition: 200ms ease;
+  transition: 200ms ease;
+}
+.header-logo .logo-m {
+  position: relative;
+  bottom: 0;
+  display: inline-block;
+  -webkit-transform: rotate(270deg);
+          transform: rotate(270deg);
+  width: 24px;
+}
+.header-logo:is(:hover, :focus-visible) {
+  text-shadow: 13px 13px lawngreen;
+  color: forestgreen;
+  font-size: 45px;
+}
+.header-logo:active {
+  text-shadow: none;
+  color: rgb(46, 160, 46);
+  font-size: 30px;
+  -webkit-transition: 100ms ease;
+  transition: 100ms ease;
 }
 
 @media screen and (920px < width < 1270px) {

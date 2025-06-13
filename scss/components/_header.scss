@@ -7,92 +7,63 @@
     border-radius: 0.1rem;
     user-select: none;
     @include flex;
+}
 
-    .header-logo {
+.nav {
+    width: 400px;
+    font-size: 25px;
+    @include flex;
+
+    .nav-link {
         color: forestgreen;
-        font-size: 40px;
+        background: transparent !important;
         transition: 200ms ease;
 
-        .logo-m {
-            position: relative;
-            bottom: 0;
-            display: inline-block;
-            transform: rotate(270deg);
-            width: 24px;
-        }
-
         &:is(:hover, :focus-visible) {
-            text-shadow: 13px 13px lawngreen;
             color: forestgreen;
-            font-size: 45px;
+            font-size: 35px;
         }
 
         &:active {
             text-shadow: none;
             color: rgb(46, 160, 46);
-            font-size: 30px;
+            font-size: 20px;
             transition: 100ms ease;
         }
     }
 
-    .nav {
-        width: 400px;
-        font-size: 25px;
-        @include flex;
+    .nav-item:not(:first-child, :last-child) .nav-link:is(:hover, :focus-visible) {
+        text-shadow: 0 13px lawngreen;
+    }
 
-        .nav-link {
-            color: forestgreen;
-            background: transparent;
-            transition: 200ms ease;
+    .nav-item:first-child .nav-link:is(:hover, :focus-visible) {
+        text-shadow: -13px 13px lawngreen;
+    }
 
-            &:is(:hover, :focus-visible) {
-                color: forestgreen;
-                font-size: 35px;
-            }
-
-            &:active {
-                text-shadow: none;
-                color: rgb(46, 160, 46);
-                font-size: 20px;
-                transition: 100ms ease;
-            }
-        }
-
-        .nav-item:not(:first-child, :last-child) .nav-link:is(:hover, :focus-visible) {
-            text-shadow: 0 13px lawngreen;
-        }
-
-        .nav-item:first-child .nav-link:is(:hover, :focus-visible) {
-            text-shadow: -13px 13px lawngreen;
-        }
-
-        .nav-item:last-child .nav-link:is(:hover, :focus-visible) {
-            text-shadow: 13px 13px lawngreen;
-        }
+    .nav-item:last-child .nav-link:is(:hover, :focus-visible) {
+        text-shadow: 13px 13px lawngreen;
     }
 }
 
 @media screen and (600px < width < 920px) {
 
-    #header {
-        .nav {
-            width: 200px;
-            height: 130px;
-            flex-direction: column;
-            justify-content: flex-start;
+    .nav {
+        width: 200px;
+        height: 130px;
+        flex-direction: column;
+        justify-content: flex-start;
 
-            .nav-link {
-                height: 40px;
-            }
+        .nav-link {
+            height: 40px;
         }
+    }
 
-        .nav-item:is(:not(:first-child, :last-child),
-            :first-child, :last-child) .nav-link:is(:hover, :focus-visible) {
-            color: forestgreen;
-            font-size: 35px;
-            transition: 200ms ease;
-            text-shadow: 13px 13px lawngreen;
-        }
+    .nav-item:is(:not(:first-child, :last-child),
+        :first-child, :last-child) .nav-link:is(:hover, :focus-visible) {
+        color: forestgreen;
+        font-size: 35px;
+        transition: 200ms ease;
+        text-shadow: 13px 13px lawngreen;
     }
 }
 
@@ -101,18 +72,15 @@
         width: 300px;
     }
 
-    .header__inner {
-
-        .header-logo {
-            font-size: 35px;
+     .header-logo {
+            font-size: 35px !important;
 
             &:is(:hover, :focus-visible) {
-                font-size: 38px;
+                font-size: 38px !important;
             }
 
             &:active {
-                font-size: 28px;
-                text-shadow: 13px 13px lawngreen;
+                font-size: 28px !important; 
             }
         }
 
@@ -135,5 +103,4 @@
                 }
             }
         }
-    }
 }
