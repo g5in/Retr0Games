@@ -1,3 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Jersey+15&display=swap');
+
+* {
+    color: forestgreen;
+    font-family: "Jersey 15";
+    font-weight: 400;
+}
+
 @mixin flex($jt-cntn : space-between, $flex-dir: row, $al-items: center) {
     display: flex;
     align-items: $al-items;
@@ -7,6 +15,7 @@
 
 @import './reset';
 @import './vars';
+@import './components/popup';
 @import './components/header';
 @import './components/hero';
 @import './components/sneak';
@@ -39,6 +48,10 @@ body {
 
 .inner {
     height: 100%;
+}
+
+.scrollLock {
+    overflow: hidden;
 }
 
 @media screen and (920px < width < 1270px) {

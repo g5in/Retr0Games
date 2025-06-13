@@ -7,6 +7,41 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
   });
 });
+////////////////////////////////////////////////////////////////popup
+
+const modal = document.querySelector(".popup")
+const modalCont = document.querySelector(".popup-container")
+const modalCloser = document.querySelector(".popup-closer")
+
+let isModalOpen = false
+
+function OpenModal(h2, p) {
+  document.body.classList.add("scrollLock")
+  $(modal).css("margin", "auto")
+  $(modal).css("opacity", "0")
+  $(".game-result").text(h2)
+  $(".final-score").text(p)
+  modal.showModal()
+  isModalOpen = true
+}
+
+
+modalCloser.addEventListener('click', () => {
+  modal.close()
+  isModalOpen = false
+  document.body.classList.remove("scrollLock")
+})
+
+document.addEventListener('click', (e) => {
+  if (isModalOpen && !modalCont.contains(e.target)) {
+    modal.close()
+    document.body.classList.remove("scrollLock")
+  }
+})
+
+document.addEventListener("cancel", (e) => {
+  document.body.classList.remove("scrollLock")
+})
 
 ////////////////////////////////////////////////////////////////sneak
 
@@ -38,6 +73,7 @@ let timerId
 function Win() {
   sneakCoordY = 2
   sneakCoordX = 1
+  OpenModal("You Win!", `your score: ${score}`)
   score = 0
   i = 0
   scoreHTML.text(`${score}`)
@@ -51,7 +87,6 @@ function Win() {
   $(".player-tail").remove()
   sneakSteps = [];
   sneakCells = [sneak]
-  alert("You Win!")
   setTimeout(() => clearInterval(timerId), 10)
 }
 
@@ -110,6 +145,7 @@ function SneakTail() {
 function GameOver() {
   sneakCoordY = 2
   sneakCoordX = 1
+  OpenModal("You have lost", `your score: ${score}`)
   score = 0
   i = 0
   scoreHTML.text(`${score}`)
@@ -123,7 +159,6 @@ function GameOver() {
   $(".player-tail").remove()
   sneakSteps = [];
   sneakCells = [sneak]
-  alert("GameOver")
   setTimeout(() => clearInterval(timerId), 10)
 }
 

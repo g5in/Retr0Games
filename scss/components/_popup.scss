@@ -1,0 +1,55 @@
+.popup {
+    width: 400px;
+    height: 300px;
+    margin: auto 20dvh auto 0;
+    padding: 40px 30px;
+    border-radius: 10%;
+    background-color: rgb(32, 32, 32);
+    transition: 300ms ease-in-out all;
+
+    .popup__container {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        @include flex(start, column, start);
+
+        .game-result {
+            font-size: 42px;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+
+        .final-score {
+            font-size: 24px;
+        }
+
+        .popup-closer {
+            position: absolute;
+            bottom: 0;
+            font-size: 24px;
+            background-color: rgb(23, 23, 23);
+            width: 100px;
+            height: 30px;
+            border-radius: 5px;
+            align-self: end;
+            transition: 200ms ease-in-out;
+
+            &:is(:focus-visible, :hover) {
+                width: 120px;
+                height: 35px;
+                font-size: 26px;
+            }
+
+            &:active {
+                width: 80px;
+                height: 25px;
+                font-size: 22px;
+            }
+        }
+    }
+
+    &::backdrop {
+        background: rgba(37, 37, 37, 0.325);
+        transition: 100ms;
+    }
+}
