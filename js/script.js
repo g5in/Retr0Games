@@ -18,7 +18,7 @@ let isModalOpen = false
 function OpenModal(h2, p) {
   document.body.classList.add("scrollLock")
   $(modal).css("margin", "auto")
-  $(modal).css("opacity", "0")
+  $(modal).css("opacity", "1")
   $(".game-result").text(h2)
   $(".final-score").text(p)
   modal.showModal()
@@ -27,12 +27,14 @@ function OpenModal(h2, p) {
 
 
 modalCloser.addEventListener('click', () => {
+  $(modal).css("opacity", "0")
   modal.close()
   isModalOpen = false
   document.body.classList.remove("scrollLock")
 })
 
 document.addEventListener('click', (e) => {
+  $(modal).css("opacity", "0")
   if (isModalOpen && !modalCont.contains(e.target)) {
     modal.close()
     document.body.classList.remove("scrollLock")
@@ -40,6 +42,7 @@ document.addEventListener('click', (e) => {
 })
 
 document.addEventListener("cancel", (e) => {
+  $(modal).css("opacity", "0")
   document.body.classList.remove("scrollLock")
 })
 
